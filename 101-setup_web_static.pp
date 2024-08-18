@@ -27,7 +27,7 @@ exec {'update apt':
 
 -> exec {'add test content':
   provider => shell,
-  command  => 'echo "<h1>HI<h1>" > /data/web_static/releases/test/index.html',
+  command  => 'echo "<h1>Hello World<h1>" > /data/web_static/releases/test/index.html',
 }
 
 -> exec {'create symbolic link to current':
