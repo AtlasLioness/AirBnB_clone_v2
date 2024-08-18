@@ -5,8 +5,6 @@ Module for full deployment on web servers.
 import os
 from datetime import datetime
 from fabric.api import *
-
-
 env.hosts = ['3.86.7.210', '100.25.202.154']
 
 
@@ -48,6 +46,6 @@ def do_deploy(archive_path):
 def deploy():
     """ Fabric script to create & distribute archive to web servers."""
     filepath = do_pack()
-    if not filepath:
-        return None
+    if filepath is None:
+        return False
     return do_deploy(filepath)
