@@ -26,8 +26,9 @@ def croute(text):
     return "C " + text.replace('_', ' ')
 
 
+@app.route("/python/", defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
-def pythonroute(text="is cool"):
+def pythonroute(text):
     """display “Python ”, followed by the value of the text variable
     (replace underscore _ symbols with a space"""
     return "Python " + text.replace('_', ' ')
