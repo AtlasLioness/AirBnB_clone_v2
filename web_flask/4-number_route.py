@@ -34,11 +34,10 @@ def pythonroute(text):
     return "Python " + text.replace('_', ' ')
 
 
-@app.route("/number/<n>", strict_slashes=False)
+@app.route("/number/<int:n>", strict_slashes=False)
 def numberroute(n):
     """display 'n is a number' only if n is int"""
-    if n is int:
-        return "{} is a number".format(n)
+    return "{} is a number".format(n)
 
 
 if __name__ == "__main__":
