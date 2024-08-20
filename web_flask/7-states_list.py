@@ -3,14 +3,14 @@
 Module that starts a Flask web app.
 """
 from flask import Flask, render_template
-from models import *
 from models import storage
+from models.state import State
 
 app = Flask(__name__)
 
 
 @app.route("/states_list", strict_slashes=False)
-def statelist():
+def state_list():
     """Displays HTML page with states listed in a-z order"""
     states = sorted(list(storage.all("State").values()), key=lambda x: x.name)
     return render_template("7-states_list.html", states=states)
