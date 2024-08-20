@@ -74,6 +74,5 @@ class DBStorage:
 
     def close(self):
         """remove() method on private session attribute"""
-        if self.__session is not None:
-            self.__session.remove()
+        self.__session.remove()
         self.reload()  # DBStorage creates a new Session after close()
