@@ -15,9 +15,8 @@ from models.review import Review
 import shlex
 
 classes = {"BaseModel": BaseModel, "User": User, "Place": Place,
-            "State": State, "City": City, "Amenity": Amenity,
-            "Review": Review}
-
+        "State": State, "City": City, "Amenity": Amenity,
+        "Review": Review}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -25,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
 
     # determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) '
-    
+
     def do_quit(self, command):
         """ Method to exit the HBNB console"""
         return True
@@ -76,11 +75,11 @@ class HBNBCommand(cmd.Cmd):
         if args[0] in classes:
             new_dict = self._key_value_parser(args[1:])
             instance = classes[args[0]](**new_dict)
+            print(instance.id)
+            instance.save()
         else:
             print("** class doesn't exist **")
             return False
-        print(instance.id)
-        instance.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -158,14 +157,15 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         """ Updates a certain object with new info """
         args = shlex.split(arg)
-        integers = ["number_rooms", "number_bathrooms", "max_guest", "price_by_night"]
+        integers = ["number_rooms", "number_bathrooms",
+                "max_guest", "price_by_night"]
         floats = ["latitue", "longitude"]
         if len(args) == 0:
            print("** class name missing **")
         elif args[0] in classes:
             if len(args) > 1:
                 k = args[0] + "." + args[1]
-                if k in moels.storage.all():
+                if k in models.storage.all():
                     if len(args) > 2:
                         if len(args) > 3:
                             if args[0] == "Place":
@@ -174,7 +174,7 @@ class HBNBCommand(cmd.Cmd):
                                         args[3] = int(args[3])
                                     except:
                                         args[3] = 0
-                                elif args [2] in floats:
+                                elif args[2] in floats:
                                     try:
                                         args[3] = float(args[3])
                                     except:
@@ -191,11 +191,12 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
         else:
             print("** class doesn't exist **")
-        
+
         def help_update(self):
             """ Help information for the update class """
             print("Updates an object with new information")
             print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
